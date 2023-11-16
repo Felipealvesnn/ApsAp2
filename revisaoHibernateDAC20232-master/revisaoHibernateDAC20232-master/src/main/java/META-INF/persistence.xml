@@ -1,4 +1,4 @@
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+<!--<persistence xmlns="http://java.sun.com/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
@@ -17,4 +17,26 @@
         </properties>
     </persistence-unit>
 
+</persistence>
+-->
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+             
+    <persistence-unit name="revisaoPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://(localdb)\\MSSQLLocalDB;databaseName=cuida_aquiraz;integratedSecurity=true;" />
+            <!-- Use integratedSecurity=true para autenticação do Windows, remova se usar autenticação do SQL Server -->
+       
+            
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+    </persistence-unit>
+    
 </persistence>
