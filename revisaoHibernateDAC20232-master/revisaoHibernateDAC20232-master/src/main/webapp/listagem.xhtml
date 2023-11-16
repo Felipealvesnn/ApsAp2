@@ -28,13 +28,18 @@
             <p:column headerText="Gols Time 2">
                 <h:outputText value="#{jogo.golsTime2}" />
             </p:column>
-            <p:column headerText="Ações">
-                <!-- Botão de edição -->
-                <p:commandButton icon="pi pi-pencil" action="#{jogoBean.editarJogo(jogo)}" update=":formEdicao" oncomplete="PF('modalEditar').show()" />
-
-                <!-- Botão de exclusão com confirmação -->
-                <p:commandButton icon="pi pi-trash" action="#{jogoBean.excluirJogo(jogo)}"  update="formTabela"/>
-            </p:column>
+            <!-- Adicione esta linha dentro do p:dataTable -->
+			<p:column headerText="Ações">
+			    <!-- Botão de edição -->
+			    <p:commandButton icon="pi pi-pencil" action="#{jogoBean.editarJogo(jogo)}" update=":modalEditar" oncomplete="PF('modalEditar').show()" />
+			
+			    <!-- Botão de exclusão com confirmação -->
+			    <p:commandButton icon="pi pi-trash" action="#{jogoBean.excluirJogo(jogo)}"  update="formTabela"/>
+			
+			<p:commandButton value="Resumo" action="#{jogoBean.exibirResumo()}" update=":modalResumo" oncomplete="PF('modalResumo').show()" />
+			
+			
+			</p:column>
         </p:dataTable>
 
         <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
@@ -53,7 +58,16 @@
         </h:form>
     </p:dialog>
 
+<p:commandButton value="Resumo" action="#{jogoBean.exibirResumo}" update=":modalResumo" oncomplete="PF('modalResumo').show()" />
 
+<p:dialog header="Resumo de Pontuações" widgetVar="modalResumo" resizable="false" id="modalResumo" modal="true">
+    <h:outputText value="Time: #{jogoBean.resumoTime}" />
+    <h:outputText value="Pontuação: #{jogoBean.resumoPontuacao}" />
+    <!-- Adicione outros campos conforme necessário -->
+</p:dialog>
+
+
+  
 
 </h:body>
 </html>

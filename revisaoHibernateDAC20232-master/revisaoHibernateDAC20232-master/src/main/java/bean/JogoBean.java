@@ -21,7 +21,45 @@ public class JogoBean {
     private Integer golsTime2;
     private  Jogo jogoSelecionado;
     private List<Jogo> listaJogos;
+    private String resumoTime;
+    private int resumoPontuacao;
 
+    
+
+
+    public void calcularResumo() {
+        int totalPontuacao = 0;
+        int totalVitorias = 0;
+        int totalEmpates = 0;
+        int totalDerrotas = 0;
+        int totalGolsMarcados = 0;
+        int totalGolsSofridos = 0;
+
+        for (Jogo jogo : listaJogos) {
+            totalGolsMarcados += jogo.getGolsTime1() + jogo.getGolsTime2();
+            totalGolsSofridos += jogo.getGolsTime1() + jogo.getGolsTime2();
+
+            if (jogo.getGolsTime1() > jogo.getGolsTime2()) {
+                totalPontuacao += 3; // Vitória
+                totalVitorias++;
+            } else if (jogo.getGolsTime1() < jogo.getGolsTime2()) {
+                totalDerrotas++;
+            } else {
+                totalPontuacao += 1; // Empate
+                totalEmpates++;
+            }
+        }
+
+        resumoPontuacao = totalPontuacao;
+        resumoTime = "Resumo Geral";
+        // Atribua outros campos conforme necessário
+    }
+    public void exibirResumo() {
+        calcularResumo();
+    }
+
+
+    
    
     public void salvarJogo() {
         if (time1.equals(time2)) {
@@ -54,7 +92,10 @@ public class JogoBean {
         }
     }
 
-    public void salvarEdicao() {
+    
+     
+   
+  public void salvarEdicao() {
         if (jogoSelecionado != null) {
             JogoDAO jogoDAO = new JogoDAO();
             
@@ -149,6 +190,13 @@ public class JogoBean {
 
     public void setGolsTime2(Integer golsTime2) {
         this.golsTime2 = golsTime2;
+    }
+    public String getResumoTime() {
+        return resumoTime;
+    }
+
+    public int getResumoPontuacao() {
+        return resumoPontuacao;
     }
 
 
