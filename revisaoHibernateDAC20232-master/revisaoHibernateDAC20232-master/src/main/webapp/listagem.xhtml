@@ -9,7 +9,7 @@
 </h:head>
 <h:body>
 
-    <h:form id="formTabela">
+    <h:form id="formTabela" prependId="false">
         <h2>Listagem de Jogos</h2>
 
         <p:dataTable var="jogo" value="#{jogoBean.listaJogos}" emptyMessage="Nenhum jogo encontrado">
@@ -29,15 +29,19 @@
                 <h:outputText value="#{jogo.golsTime2}" />
             </p:column>
             <p:column headerText="Ações">
-                <p:commandButton icon="pi pi-pencil" action="#{jogoBean.editarJogo(jogo)}" update=":formEdicao" oncomplete="PF('dlgEdicao').show()" />
+                <!-- Botão de edição -->
+                <p:commandButton icon="pi pi-pencil" action="#{jogoBean.editarJogo(jogo)}" update=":formEdicao" oncomplete="PF('modalEditar').show()" />
+
+                <!-- Botão de exclusão com confirmação -->
+                <p:commandButton icon="pi pi-trash" action="#{jogoBean.excluirJogo(jogo)}"  update="formTabela"/>
             </p:column>
         </p:dataTable>
 
         <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
     </h:form>
 
-    <p:dialog header="Editar Jogo" widgetVar="dlgEdicao" resizable="false" id="dlgEdicao" modal="true">
-        <h:form id="formEdicao">
+    <p:dialog header="Editar Jogo" widgetVar="modalEditar" resizable="false" id="modalEditar" modal="true">
+        <h:form id="formEdicao" prependId="false">
             <!-- Campos de edição -->
             <p:inputText value="#{jogoBean.jogoSelecionado.time1}" label="Time 1" />
             <p:inputText value="#{jogoBean.jogoSelecionado.time2}" label="Time 2" />
@@ -45,9 +49,11 @@
             <p:inputText value="#{jogoBean.jogoSelecionado.golsTime2}" label="Gols Time 2" />
 
             <!-- Botão de salvar -->
-            <p:commandButton value="Salvar" action="#{jogoBean.salvarEdicao}" update=":formTabela" oncomplete="PF('dlgEdicao').hide()" />
+            <p:commandButton value="Salvar" action="#{jogoBean.salvarEdicao}" update=":formTabela" oncomplete="PF('modalEditar').hide()" />
         </h:form>
     </p:dialog>
+
+
 
 </h:body>
 </html>

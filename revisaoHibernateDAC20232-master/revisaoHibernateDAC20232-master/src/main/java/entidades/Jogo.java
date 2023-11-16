@@ -48,6 +48,15 @@ public class Jogo  implements Cloneable{
         this.golsTime1 = golsTime1;
         this.golsTime2 = golsTime2;
     }
+    public Jogo(Integer Id, Date dataPartida, Date dataCadastro, String time1, String time2, Integer golsTime1, Integer golsTime2) {
+        this.id = Id;
+    	this.dataPartida = dataPartida;
+        this.dataCadastro = dataCadastro;
+        this.time1 = time1;
+        this.time2 = time2;
+        this.golsTime1 = golsTime1;
+        this.golsTime2 = golsTime2;
+    }
 
     // Getters e Setters
     public Integer getId() {

@@ -2,7 +2,7 @@ package bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import dao.JogoDAO;
@@ -11,22 +11,23 @@ import entidades.Jogo;
 import java.util.Date;
 import java.util.List;
 
+@ViewScoped
 @ManagedBean
-@RequestScoped
 public class JogoBean {
 
     private String time1;
     private String time2;
     private Integer golsTime1;
     private Integer golsTime2;
-    private Jogo jogoSelecionado;
+    private  Jogo jogoSelecionado;
     private List<Jogo> listaJogos;
 
-    public String salvarJogo() {
+   
+    public void salvarJogo() {
         if (time1.equals(time2)) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não é permitido salvar um jogo com times iguais."));
-            return null;
+          //  return null;
         }
 
         Jogo jogo = new Jogo(new Date(), new Date(), time1, time2, golsTime1, golsTime2);
@@ -42,7 +43,7 @@ public class JogoBean {
         // Limpa os campos após salvar
         limparCampos();
 
-        return null;
+      //  return null;
     }
 
     public void editarJogo(Jogo jogo) {
@@ -76,7 +77,24 @@ public class JogoBean {
         }
     }
 
+    public void excluirJogo(Jogo jogo) {
+        try {
+            JogoDAO jogoDAO = new JogoDAO();
+            jogoDAO.excluirJogo(jogo);
 
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Jogo excluído com sucesso!"));
+
+            // Atualiza a lista de jogos após excluir
+            listaJogos = jogoDAO.listarJogos();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao excluir o jogo."));
+            e.printStackTrace(); // Considere logar o erro de alguma forma mais apropriada para seu aplicativo
+        }
+    }
+    
+    
     public List<Jogo> getListaJogos() {
         if (listaJogos == null) {
             // Se a lista ainda não foi carregada, carregue-a agora
@@ -92,6 +110,47 @@ public class JogoBean {
         golsTime1 = null;
         golsTime2 = null;
     }
+  
+    public Jogo getJogoSelecionado() {
+        return jogoSelecionado;
+    }
+
+    public void setJogoSelecionado(Jogo jogoSelecionado) {
+        this.jogoSelecionado = jogoSelecionado;
+    }
+
+    public String getTime1() {
+        return time1;
+    }
+
+    public void setTime1(String time1) {
+        this.time1 = time1;
+    }
+
+    public String getTime2() {
+        return time2;
+    }
+
+    public void setTime2(String time2) {
+        this.time2 = time2;
+    }
+
+    public Integer getGolsTime1() {
+        return golsTime1;
+    }
+
+    public void setGolsTime1(Integer golsTime1) {
+        this.golsTime1 = golsTime1;
+    }
+
+    public Integer getGolsTime2() {
+        return golsTime2;
+    }
+
+    public void setGolsTime2(Integer golsTime2) {
+        this.golsTime2 = golsTime2;
+    }
+
 
     // Outros métodos conforme necessário
 }

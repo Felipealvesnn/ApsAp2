@@ -80,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -113,7 +114,7 @@ public class JogoDAO {
 
     public List<Jogo> listarJogos() {
         if (jogosEmMemoria.isEmpty()) {
-            jogosEmMemoria = criarJogosAleatorios();
+            jogosEmMemoria.addAll(criarJogosAleatorios());
         }
         return new ArrayList<>(jogosEmMemoria);
     }
@@ -142,6 +143,8 @@ public class JogoDAO {
                 .collect(Collectors.toList());
     }
 
+    private static AtomicInteger idGenerator = new AtomicInteger(1);
+
     private Jogo criarJogoAleatorio(Random random) {
         Date dataPartida = new Date();
         Date dataCadastro = new Date();
@@ -150,6 +153,10 @@ public class JogoDAO {
         int golsTime1 = random.nextInt(5);
         int golsTime2 = random.nextInt(5);
 
-        return new Jogo(dataPartida, dataCadastro, time1, time2, golsTime1, golsTime2);
+        // Obtém um novo ID automático
+        int novoId = idGenerator.getAndIncrement();
+
+        return new Jogo(novoId, dataPartida, dataCadastro, time1, time2, golsTime1, golsTime2);
     }
+
 }

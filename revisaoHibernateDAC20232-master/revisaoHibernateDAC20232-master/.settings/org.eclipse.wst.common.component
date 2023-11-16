@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="revisaoHibernateDAC20232">
+        
+    <wb-module deploy-name="APSSPD">
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <property name="context-root" value="revisaoHibernateDAC20232"/>
-        <property name="java-output-path" value="/revisaoHibernateDAC20232/build/classes"/>
+                
+        <property name="java-output-path" value="/APSSPD/build/classes"/>
+        <property name="context-root" value="APSSPD"/>
+            
     </wb-module>
+    
 </project-modules>
