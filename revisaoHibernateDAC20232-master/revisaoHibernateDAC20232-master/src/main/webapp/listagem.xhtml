@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Listagem de Jogos</title>
+</h:head>
+<h:body>
+
+    <h:form>
+        <h2>Listagem de Jogos</h2>
+
+        <p:dataTable var="jogo" value="#{jogoBean.listaJogos}" emptyMessage="Nenhum jogo encontrado">
+            <p:column headerText="ID">
+                <h:outputText value="#{jogo.id}" />
+            </p:column>
+            <p:column headerText="Time 1">
+                <h:outputText value="#{jogo.time1}" />
+            </p:column>
+            <p:column headerText="Time 2">
+                <h:outputText value="#{jogo.time2}" />
+            </p:column>
+            <p:column headerText="Gols Time 1">
+                <h:outputText value="#{jogo.golsTime1}" />
+            </p:column>
+            <p:column headerText="Gols Time 2">
+                <h:outputText value="#{jogo.golsTime2}" />
+            </p:column>
+        </p:dataTable>
+
+        <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
+    </h:form>
+
+</h:body>
+</html>

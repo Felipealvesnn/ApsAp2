@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Cadastro de Jogo</title>
+    <link rel="stylesheet" type="text/css" href="revisaoHibernateDAC20232/src/main/webapp/resources/cssPasta/NewFile.css" />
+</h:head>
+<h:body>
+
+    <h:form id="formulario" styleClass="cadastro-form">
+        <p:panelGrid columns="2" columnClasses="labelColumn, valueColumn" styleClass="ui-panelgrid ui-fluid">
+            <h:outputLabel for="time1" value="Time 1:" />
+            <p:inputText id="time1" value="#{JogoBean.time1}" required="true" />
+
+            <h:outputLabel for="time2" value="Time 2:" />
+            <p:inputText id="time2" value="#{JogoBean.time2}" required="true" />
+
+            <h:outputLabel for="golsTime1" value="Gols Time 1:" />
+            <p:inputText id="golsTime1" value="#{JogoBean.golsTime1}" required="true" />
+
+            <h:outputLabel for="golsTime2" value="Gols Time 2:" />
+            <p:inputText id="golsTime2" value="#{JogoBean.golsTime2}" required="true" />
+        </p:panelGrid>
+
+        <p:commandButton value="Salvar" action="#{jogoBean.salvarJogo}" styleClass="button-save" />
+
+        <p:messages id="msgs" showDetail="true" autoUpdate="true" closable="true" />
+
+        <p:link value="Ir para Outra Página" outcome="listagem.xhtml" />
+    </h:form>
+
+</h:body>
+</html>
