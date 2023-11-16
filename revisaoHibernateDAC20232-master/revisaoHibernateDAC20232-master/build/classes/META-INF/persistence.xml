@@ -3,7 +3,9 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="ApsAp2">
+    <persistence-unit name="revisaoPU" transaction-type="RESOURCE_LOCAL">
+     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/dac20232" />

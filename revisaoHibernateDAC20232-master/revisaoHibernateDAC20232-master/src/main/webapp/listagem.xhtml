@@ -9,7 +9,7 @@
 </h:head>
 <h:body>
 
-    <h:form>
+    <h:form id="formTabela">
         <h2>Listagem de Jogos</h2>
 
         <p:dataTable var="jogo" value="#{jogoBean.listaJogos}" emptyMessage="Nenhum jogo encontrado">
@@ -28,10 +28,26 @@
             <p:column headerText="Gols Time 2">
                 <h:outputText value="#{jogo.golsTime2}" />
             </p:column>
+            <p:column headerText="Ações">
+                <p:commandButton icon="pi pi-pencil" action="#{jogoBean.editarJogo(jogo)}" update=":formEdicao" oncomplete="PF('dlgEdicao').show()" />
+            </p:column>
         </p:dataTable>
 
         <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
     </h:form>
+
+    <p:dialog header="Editar Jogo" widgetVar="dlgEdicao" resizable="false" id="dlgEdicao" modal="true">
+        <h:form id="formEdicao">
+            <!-- Campos de edição -->
+            <p:inputText value="#{jogoBean.jogoSelecionado.time1}" label="Time 1" />
+            <p:inputText value="#{jogoBean.jogoSelecionado.time2}" label="Time 2" />
+            <p:inputText value="#{jogoBean.jogoSelecionado.golsTime1}" label="Gols Time 1" />
+            <p:inputText value="#{jogoBean.jogoSelecionado.golsTime2}" label="Gols Time 2" />
+
+            <!-- Botão de salvar -->
+            <p:commandButton value="Salvar" action="#{jogoBean.salvarEdicao}" update=":formTabela" oncomplete="PF('dlgEdicao').hide()" />
+        </h:form>
+    </p:dialog>
 
 </h:body>
 </html>

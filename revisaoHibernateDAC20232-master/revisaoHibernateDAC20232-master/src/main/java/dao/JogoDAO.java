@@ -33,6 +33,24 @@ public class JogoDAO {
             em.close();
         }
     }
+    public void atualizarJogo(Jogo jogo) {
+        EntityManager em = JPAUtil.criarEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            em.merge(jogo);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
 
     public void editarJogo(Jogo jogo) {
         EntityManager em = JPAUtil.criarEntityManager();
@@ -72,7 +90,7 @@ public class JogoDAO {
     }
 
     public List<Jogo> listarJogos() {
-        EntityManager em = JPAUtil.criarEntityManager();
+    	EntityManager em = JPAUtil.criarEntityManager();
         try {
             TypedQuery<Jogo> query = em.createQuery("SELECT j FROM Jogo j", Jogo.class);
             List<Jogo> jogos = query.getResultList();

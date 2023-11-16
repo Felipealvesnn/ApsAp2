@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 @Entity
-public class Jogo {
+public class Jogo  implements Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,10 @@ public class Jogo {
     @Column(name = "gols_time2")
     private Integer golsTime2;
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     // Construtor padrão
     public Jogo() {
     }
