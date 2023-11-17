@@ -37,12 +37,12 @@
 			    <p:commandButton icon="pi pi-trash" action="#{jogoBean.excluirJogo(jogo)}"  update="formTabela"/>
 			
 			    <!-- Botão de resumo -->
-            <p:commandButton value="Resumo" action="#{jogoBean.exibirResumo(jogo)}" update=":resumoDialog" oncomplete="PF('resumoDialog').show()" />
+           
 			
 			
 			</p:column>
         </p:dataTable>
-
+   <p:commandButton value="Resumo"  update=":resumoDialog" oncomplete="PF('resumoDialog').show()" />
         <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
     </h:form>
 
@@ -61,31 +61,36 @@
 
 
 <p:dialog header="Resumo do Jogo" widgetVar="resumoDialog" resizable="false" id="resumoDialog" modal="true">
-    <h:panelGrid columns="2" cellpadding="5">
-        <h:outputText value="Time 1:" />
-        <h:outputText value="#{jogoBean.jogoSelecionado.time1}" />
+   <p:dataTable var="resultado" value="#{jogoBean.getListREsultadoTAbela()}" emptyMessage="Nenhum resultado encontrado">
+    <p:column headerText="Nome do Time">
+        <h:outputText value="#{resultado.nomeTime}" />
+    </p:column>
+   
+    <p:column headerText="Vitórias">
+        <h:outputText value="#{resultado.vitorias}" />
+    </p:column>
+    <p:column headerText="Derrotas">
+        <h:outputText value="#{resultado.derrotas}" />
+    </p:column>
+    <p:column headerText="Empates">
+        <h:outputText value="#{resultado.empates}" />
+    </p:column>
+    <p:column headerText="Gols Marcados">
+        <h:outputText value="#{resultado.golsMarcados}" />
+    </p:column>
+    <p:column headerText="Gols Sofridos">
+        <h:outputText value="#{resultado.golsSofridos}" />
+    </p:column>
+    <p:column headerText="Saldo de Gols">
+        <h:outputText value="#{resultado.saldoGols}" />
+    </p:column>
+    
+     <p:column headerText="Pontuação">
+        <h:outputText value="#{resultado.pontuacao}" />
+    </p:column>
+   
+</p:dataTable>
 
-        <h:outputText value="Pontuação:" />
-        <h:outputText value="#{jogoBean.pontuacao}" />
-
-        <h:outputText value="Número de Vitórias:" />
-        <h:outputText value="#{jogoBean.numeroVitorias}" />
-
-        <h:outputText value="Número de Derrotas:" />
-        <h:outputText value="#{jogoBean.numeroDerrotas}" />
-
-        <h:outputText value="Número de Empates:" />
-        <h:outputText value="#{jogoBean.numeroEmpates}" />
-
-        <h:outputText value="Gols Marcados:" />
-        <h:outputText value="#{jogoBean.golsMarcados}" />
-
-        <h:outputText value="Gols Sofridos:" />
-        <h:outputText value="#{jogoBean.golsSofridos}" />
-
-        <h:outputText value="Saldo de Gols:" />
-        <h:outputText value="#{jogoBean.saldoGols}" />
-    </h:panelGrid>
 </p:dialog>
 
 

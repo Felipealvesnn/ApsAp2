@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import dao.JogoDAO;
 import entidades.Jogo;
+import entidades.resultadoJogo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,8 +27,9 @@ public class JogoBean {
     private Integer golsTime2;
     private  Jogo jogoSelecionado;
     private List<Jogo> listaJogos;
-    private List<String> listaTimes;
     private List<Jogo> listaJogosFiltrados;
+    private List<String> listaTimes;
+    private List<resultadoJogo> ListREsultadoTAbela;
     
     
     private int pontuacao;
@@ -45,9 +47,13 @@ public class JogoBean {
     @PostConstruct
     public void init() {
         // Inicialize a lista de times a partir da lista de jogos
+    	ListREsultadoTAbela = new ArrayList<>();
+    	
         JogoDAO jogoDAO = new JogoDAO();
         listaJogos = jogoDAO.listarJogos();
         setListaTimes(extrairNomesTimes(listaJogos));
+        exibirResumo();
+ 
     }
     
     private List<String> extrairNomesTimes(List<Jogo> listaJogos) {
@@ -97,14 +103,14 @@ public class JogoBean {
     }
 
     
-    public void exibirResumo(Jogo jogo) {
-        jogoSelecionado = jogo;
-
+    public void exibirResumo() {
+      
         // Calcule as informações necessárias
-        calcularInformacoesTime(jogoSelecionado, listaJogos);
+        calcularInformacoesTime(listaJogos);
     }
 
-    private void calcularInformacoesTime(Jogo jogo, List<Jogo> listaJogos) {
+ private void calcularInformacoesTime(List<Jogo> listaJogos) {
+    for (String nome : listaTimes) {
         // Inicialize as variáveis para as informações
         int pontuacao = 0;
         int vitorias = 0;
@@ -113,10 +119,11 @@ public class JogoBean {
         int golsMarcados = 0;
         int golsSofridos = 0;
 
+        resultadoJogo result = new resultadoJogo();  // Mova a criação do resultado para fora do loop de jogos
+
         // Itera sobre a lista de jogos para calcular as informações do time
         for (Jogo j : listaJogos) {
-            // Verifica se o time1 é igual ao time do jogo selecionado
-            if (j.getTime1().equals(jogo.getTime1())) {
+            if (j.getTime1().equals(nome)) {
                 golsMarcados += j.getGolsTime1();
                 golsSofridos += j.getGolsTime2();
 
@@ -129,36 +136,53 @@ public class JogoBean {
                     pontuacao += 1; // Empate
                     empates++;
                 }
-            }
-            // Verifica se o time2 é igual ao time do jogo selecionado
-            else if (j.getTime2().equals(jogo.getTime1())) {
-                golsMarcados += j.getGolsTime2();
-                golsSofridos += j.getGolsTime1();
+            }else if(j.getTime2().equals(nome)) {
+            	
+            	  golsMarcados += j.getGolsTime1();
+                  golsSofridos += j.getGolsTime2();
 
-                if (j.getGolsTime2() > j.getGolsTime1()) {
-                    pontuacao += 3; // Vitória
-                    vitorias++;
-                } else if (j.getGolsTime2() < j.getGolsTime1()) {
-                    derrotas++;
-                } else {
-                    pontuacao += 1; // Empate
-                    empates++;
-                }
+                  if (j.getGolsTime1() > j.getGolsTime2()) {
+                      pontuacao += 3; // Vitória
+                      vitorias++;
+                  } else if (j.getGolsTime1() < j.getGolsTime2()) {
+                      derrotas++;
+                  } else {
+                      pontuacao += 1; // Empate
+                      empates++;
+                  }
             }
+         
         }
 
-        // Calcule o saldo de gols
         int saldoGols = golsMarcados - golsSofridos;
 
-        // Configure as informações no jogoSelecionado para exibição no diálogo
-        setPontuacao(pontuacao);
-        setNumeroVitorias(vitorias);
-        setNumeroDerrotas(derrotas);
-        setNumeroEmpates(empates);
-        setGolsMarcados(golsMarcados);
-        setGolsSofridos(golsSofridos);
-        setSaldoGols(saldoGols);
+        // Configure as informações no resultado para exibição no diálogo
+        result.setPontuacao(pontuacao);
+        result.setVitorias(vitorias);
+        result.setDerrotas(derrotas);
+        result.setEmpates(empates);
+        result.setGolsMarcados(golsMarcados);
+        result.setGolsSofridos(golsSofridos);
+        result.setSaldoGols(saldoGols);
+        result.setNomeTime(nome);
+
+        // Adicione o resultado apenas uma vez, após o loop de jogos
+        ListREsultadoTAbela.add(result);
     }
+}
+
+// Método auxiliar para encontrar um resultado pelo nome do time na lista
+  private resultadoJogo encontrarResultadoPorNome(String nomeTime) {
+	    for (resultadoJogo result : ListREsultadoTAbela) {
+	        // Verifique se o nome do time não é nulo antes de chamar equals
+	        if (nomeTime != null && nomeTime.equals(result.getNomeTime())) {
+	            return result;
+	        }
+	    }
+	    return null;
+	}
+
+    
 
 
      
@@ -325,6 +349,14 @@ public class JogoBean {
 
 	public void setListaTimes(List<String> listaTimes) {
 		this.listaTimes = listaTimes;
+	}
+
+	public List<resultadoJogo> getListREsultadoTAbela() {
+		return ListREsultadoTAbela;
+	}
+
+	public void setListREsultadoTAbela(List<resultadoJogo> listREsultadoTAbela) {
+		ListREsultadoTAbela = listREsultadoTAbela;
 	}
     
     
