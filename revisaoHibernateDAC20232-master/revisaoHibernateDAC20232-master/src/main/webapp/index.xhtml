@@ -25,7 +25,7 @@
             <p:inputText id="golsTime2" value="#{jogoBean.golsTime2}" required="true" />
         </p:panelGrid>
 
-       <p:commandButton value="Salvar 2" action="#{jogoBean.salvarJogo()}"   styleClass="button-save" />
+       <p:commandButton value="Salvar 2" action="#{jogoBean.salvarJogo()}"  update="formulario"  styleClass="button-save" />
 
         <p:messages id="msgs" showDetail="true" autoUpdate="true" closable="true" />
 

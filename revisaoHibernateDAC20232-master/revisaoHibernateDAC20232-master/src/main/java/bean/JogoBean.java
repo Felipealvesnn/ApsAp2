@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @ViewScoped
 @ManagedBean
@@ -61,6 +62,7 @@ public class JogoBean {
     }
 
     
+    private static AtomicInteger idGenerator = new AtomicInteger(1);
    
     public void salvarJogo() {
         if (time1.equals(time2)) {
@@ -69,7 +71,8 @@ public class JogoBean {
           //  return null;
         }
 
-        Jogo jogo = new Jogo(new Date(), new Date(), time1, time2, golsTime1, golsTime2);
+        int novoId = idGenerator.getAndIncrement();
+        Jogo jogo = new Jogo(novoId, new Date(), new Date(), time1, time2, golsTime1, golsTime2);
         JogoDAO jogoDAO = new JogoDAO();
         jogoDAO.salvarJogo(jogo);
 
