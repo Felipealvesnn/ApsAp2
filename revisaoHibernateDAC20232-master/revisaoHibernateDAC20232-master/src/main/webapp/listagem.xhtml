@@ -60,15 +60,28 @@
     </p:dialog>
 
 
-   <p:dialog header="Resumo do Jogo" widgetVar="resumoDialog" resizable="false" id="resumoDialog" modal="true">
+ <p:dialog header="Resumo do Jogo" widgetVar="resumoDialog" resizable="false" id="resumoDialog" modal="true">
     <!-- Adicione aqui os componentes para exibir as informações de resumo -->
-    <h:outputText value="Time: #{jogoBean.jogoSelecionado.time1}" />
-    
-     <br/>
-  
-    <h:outputText value="Time: #{jogoBean.jogoSelecionado.time2}" />
+    <h:outputText value="Time 1: #{jogoBean.jogoSelecionado.time1}" />
+    <br/>
+    <br/>
+    <h:outputText value="Pontuação: #{jogoBean.pontuacao}" />
+    <br/>
+    <h:outputText value="Número de Vitórias: #{jogoBean.numeroVitorias}" />
+    <br/>
+    <h:outputText value="Número de Derrotas: #{jogoBean.numeroDerrotas}" />
+    <br/>
+    <h:outputText value="Número de Empates: #{jogoBean.numeroEmpates}" />
+    <br/>
+    <h:outputText value="Gols Marcados: #{jogoBean.golsMarcados}" />
+    <br/>
+    <h:outputText value="Gols Sofridos: #{jogoBean.golsSofridos}" />
+    <br/>
+    <h:outputText value="Saldo de Gols: #{jogoBean.saldoGols}" />
     <!-- Adicione outros campos conforme necessário -->
-   </p:dialog>
+      <br/>
+</p:dialog>
+
    
   
 
