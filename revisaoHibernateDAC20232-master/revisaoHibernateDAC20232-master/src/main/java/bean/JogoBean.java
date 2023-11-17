@@ -1,5 +1,6 @@
 package bean;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -8,8 +9,11 @@ import javax.faces.context.FacesContext;
 import dao.JogoDAO;
 import entidades.Jogo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @ViewScoped
 @ManagedBean
@@ -21,6 +25,8 @@ public class JogoBean {
     private Integer golsTime2;
     private  Jogo jogoSelecionado;
     private List<Jogo> listaJogos;
+    private List<String> listaTimes;
+    private List<Jogo> listaJogosFiltrados;
     
     
     private int pontuacao;
@@ -35,6 +41,26 @@ public class JogoBean {
 
     
   
+    @PostConstruct
+    public void init() {
+        // Inicialize a lista de times a partir da lista de jogos
+        JogoDAO jogoDAO = new JogoDAO();
+        listaJogos = jogoDAO.listarJogos();
+        setListaTimes(extrairNomesTimes(listaJogos));
+    }
+    
+    private List<String> extrairNomesTimes(List<Jogo> listaJogos) {
+        Set<String> nomesTimes = new HashSet<String>();
+
+        for (Jogo jogo : listaJogos) {
+            nomesTimes.add(jogo.getTime1());
+            nomesTimes.add(jogo.getTime2());
+        }
+
+        return new ArrayList<>(nomesTimes);
+    }
+
+    
    
     public void salvarJogo() {
         if (time1.equals(time2)) {
@@ -289,6 +315,14 @@ public class JogoBean {
     public void setSaldoGols(int saldoGols) {
         this.saldoGols = saldoGols;
     }
+
+	public List<String> getListaTimes() {
+		return listaTimes;
+	}
+
+	public void setListaTimes(List<String> listaTimes) {
+		this.listaTimes = listaTimes;
+	}
     
     
  

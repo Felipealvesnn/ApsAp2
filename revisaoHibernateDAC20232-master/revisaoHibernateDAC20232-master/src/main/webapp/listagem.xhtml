@@ -60,27 +60,34 @@
     </p:dialog>
 
 
- <p:dialog header="Resumo do Jogo" widgetVar="resumoDialog" resizable="false" id="resumoDialog" modal="true">
-    <!-- Adicione aqui os componentes para exibir as informações de resumo -->
-    <h:outputText value="Time 1: #{jogoBean.jogoSelecionado.time1}" />
-    <br/>
-    <br/>
-    <h:outputText value="Pontuação: #{jogoBean.pontuacao}" />
-    <br/>
-    <h:outputText value="Número de Vitórias: #{jogoBean.numeroVitorias}" />
-    <br/>
-    <h:outputText value="Número de Derrotas: #{jogoBean.numeroDerrotas}" />
-    <br/>
-    <h:outputText value="Número de Empates: #{jogoBean.numeroEmpates}" />
-    <br/>
-    <h:outputText value="Gols Marcados: #{jogoBean.golsMarcados}" />
-    <br/>
-    <h:outputText value="Gols Sofridos: #{jogoBean.golsSofridos}" />
-    <br/>
-    <h:outputText value="Saldo de Gols: #{jogoBean.saldoGols}" />
-    <!-- Adicione outros campos conforme necessário -->
-      <br/>
+<p:dialog header="Resumo do Jogo" widgetVar="resumoDialog" resizable="false" id="resumoDialog" modal="true">
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputText value="Time 1:" />
+        <h:outputText value="#{jogoBean.jogoSelecionado.time1}" />
+
+        <h:outputText value="Pontuação:" />
+        <h:outputText value="#{jogoBean.pontuacao}" />
+
+        <h:outputText value="Número de Vitórias:" />
+        <h:outputText value="#{jogoBean.numeroVitorias}" />
+
+        <h:outputText value="Número de Derrotas:" />
+        <h:outputText value="#{jogoBean.numeroDerrotas}" />
+
+        <h:outputText value="Número de Empates:" />
+        <h:outputText value="#{jogoBean.numeroEmpates}" />
+
+        <h:outputText value="Gols Marcados:" />
+        <h:outputText value="#{jogoBean.golsMarcados}" />
+
+        <h:outputText value="Gols Sofridos:" />
+        <h:outputText value="#{jogoBean.golsSofridos}" />
+
+        <h:outputText value="Saldo de Gols:" />
+        <h:outputText value="#{jogoBean.saldoGols}" />
+    </h:panelGrid>
 </p:dialog>
+
 
    
   
