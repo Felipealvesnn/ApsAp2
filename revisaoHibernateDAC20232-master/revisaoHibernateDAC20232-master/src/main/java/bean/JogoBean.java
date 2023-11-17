@@ -27,7 +27,6 @@ public class JogoBean {
     private Integer golsTime2;
     private  Jogo jogoSelecionado;
     private List<Jogo> listaJogos;
-    private List<Jogo> listaJogosFiltrados;
     private List<String> listaTimes;
     private List<resultadoJogo> ListREsultadoTAbela;
     
@@ -172,16 +171,6 @@ public class JogoBean {
     }
 }
 
-// Método auxiliar para encontrar um resultado pelo nome do time na lista
-  private resultadoJogo encontrarResultadoPorNome(String nomeTime) {
-	    for (resultadoJogo result : ListREsultadoTAbela) {
-	        // Verifique se o nome do time não é nulo antes de chamar equals
-	        if (nomeTime != null && nomeTime.equals(result.getNomeTime())) {
-	            return result;
-	        }
-	    }
-	    return null;
-	}
 
     
 
