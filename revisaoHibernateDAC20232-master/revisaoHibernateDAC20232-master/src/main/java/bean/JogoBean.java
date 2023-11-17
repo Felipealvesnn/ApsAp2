@@ -119,9 +119,9 @@ public class JogoBean {
         int golsMarcados = 0;
         int golsSofridos = 0;
 
-        resultadoJogo result = new resultadoJogo();  // Mova a criação do resultado para fora do loop de jogos
+        resultadoJogo result = new resultadoJogo();  
 
-        // Itera sobre a lista de jogos para calcular as informações do time
+   
         for (Jogo j : listaJogos) {
             if (j.getTime1().equals(nome)) {
                 golsMarcados += j.getGolsTime1();
