@@ -139,8 +139,8 @@ public class JogoBean {
                 }
             }else if(j.getTime2().equals(nome)) {
             	
-            	  golsMarcados += j.getGolsTime1();
-                  golsSofridos += j.getGolsTime2();
+            	  golsMarcados += j.getGolsTime2();
+                  golsSofridos += j.getGolsTime1();
 
                   if (j.getGolsTime1() > j.getGolsTime2()) {
                       pontuacao += 3; // Vitória
