@@ -35,6 +35,7 @@
 			
 			    <!-- Botão de exclusão com confirmação -->
 			    <p:commandButton icon="pi pi-trash" action="#{jogoBean.excluirJogo(jogo)}"  update="formTabela"/>
+			    <p:commandButton icon="pi pi-trash" action="#{jogoBean.editarJogo(jogo)}" onclick="PF('confirmation').show()" />
 			
 			    <!-- Botão de resumo -->
            
@@ -42,7 +43,7 @@
 			
 			</p:column>
         </p:dataTable>
-   <p:commandButton value="Resumo"  update=":resumoDialog" oncomplete="PF('resumoDialog').show()" />
+   <p:commandButton value="Resumo" action="#{jogoBean.exibirResumo()}"  update=":resumoDialog" oncomplete="PF('resumoDialog').show()" />
         <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
     </h:form>
 
@@ -92,6 +93,14 @@
 </p:dataTable>
 
 </p:dialog>
+
+
+<p:confirmDialog id="confirmDialog" message="Tem certeza que deseja excluir o jogo?" header="Confirmação"
+    severity="alert" widgetVar="confirmation">
+    <p:commandButton value="Sim" oncomplete="PF('confirmation').hide()" actionListener="#{jogoBean.excluirJogo(jogo)}" 
+        update="formTabela" />
+    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" onclick="PF('confirmation').hide()" />
+</p:confirmDialog>
 
 
    

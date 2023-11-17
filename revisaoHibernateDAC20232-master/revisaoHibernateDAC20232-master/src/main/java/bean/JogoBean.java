@@ -104,8 +104,9 @@ public class JogoBean {
 
     
     public void exibirResumo() {
-      
+       
         // Calcule as informações necessárias
+    	ListREsultadoTAbela = new ArrayList<>();
         calcularInformacoesTime(listaJogos);
     }
 
@@ -213,6 +214,7 @@ public class JogoBean {
     public void excluirJogo(Jogo jogo) {
         try {
             JogoDAO jogoDAO = new JogoDAO();
+            jogo = jogoSelecionado;
             jogoDAO.excluirJogo(jogo);
 
             FacesContext.getCurrentInstance().addMessage(null,
