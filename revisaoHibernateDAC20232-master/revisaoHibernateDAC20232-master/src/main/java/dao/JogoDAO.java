@@ -153,9 +153,13 @@ public class JogoDAO {
         Date dataPartida = new Date();
         Date dataCadastro = new Date();
 
-        // Escolhe aleatoriamente dois nomes de times
         String time1 = nomesTimes.get(random.nextInt(nomesTimes.size()));
-        String time2 = nomesTimes.get(random.nextInt(nomesTimes.size()));
+        String time2;
+
+        // Garante que time2 seja diferente de time1
+        do {
+            time2 = nomesTimes.get(random.nextInt(nomesTimes.size()));
+        } while (time1.equals(time2));
 
         int golsTime1 = random.nextInt(5);
         int golsTime2 = random.nextInt(5);
@@ -165,6 +169,7 @@ public class JogoDAO {
 
         return new Jogo(novoId, dataPartida, dataCadastro, time1, time2, golsTime1, golsTime2);
     }
+
 
 
 }

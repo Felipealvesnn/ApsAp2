@@ -52,7 +52,7 @@ public class JogoBean {
         JogoDAO jogoDAO = new JogoDAO();
         listaJogos = jogoDAO.listarJogos();
         setListaTimes(extrairNomesTimes(listaJogos));
-        exibirResumo();
+ 
  
     }
     
