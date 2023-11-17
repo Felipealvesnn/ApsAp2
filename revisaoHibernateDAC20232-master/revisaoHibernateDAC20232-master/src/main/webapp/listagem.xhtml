@@ -36,7 +36,8 @@
 			    <!-- Botão de exclusão com confirmação -->
 			    <p:commandButton icon="pi pi-trash" action="#{jogoBean.excluirJogo(jogo)}"  update="formTabela"/>
 			
-			<p:commandButton value="Resumo" action="#{jogoBean.exibirResumo()}" update=":modalResumo" oncomplete="PF('modalResumo').show()" />
+			    <!-- Botão de resumo -->
+            <p:commandButton value="Resumo" action="#{jogoBean.exibirResumo(jogo)}" update=":resumoDialog" oncomplete="PF('resumoDialog').show()" />
 			
 			
 			</p:column>
@@ -58,15 +59,17 @@
         </h:form>
     </p:dialog>
 
-<p:commandButton value="Resumo" action="#{jogoBean.exibirResumo}" update=":modalResumo" oncomplete="PF('modalResumo').show()" />
 
-<p:dialog header="Resumo de Pontuações" widgetVar="modalResumo" resizable="false" id="modalResumo" modal="true">
-    <h:outputText value="Time: #{jogoBean.resumoTime}" />
-    <h:outputText value="Pontuação: #{jogoBean.resumoPontuacao}" />
+   <p:dialog header="Resumo do Jogo" widgetVar="resumoDialog" resizable="false" id="resumoDialog" modal="true">
+    <!-- Adicione aqui os componentes para exibir as informações de resumo -->
+    <h:outputText value="Time: #{jogoBean.jogoSelecionado.time1}" />
+    
+     <br/>
+  
+    <h:outputText value="Time: #{jogoBean.jogoSelecionado.time2}" />
     <!-- Adicione outros campos conforme necessário -->
-</p:dialog>
-
-
+   </p:dialog>
+   
   
 
 </h:body>

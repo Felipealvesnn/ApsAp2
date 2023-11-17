@@ -21,45 +21,20 @@ public class JogoBean {
     private Integer golsTime2;
     private  Jogo jogoSelecionado;
     private List<Jogo> listaJogos;
-    private String resumoTime;
-    private int resumoPontuacao;
+    
+    
+    private int pontuacao;
+    private int numeroVitorias;
+    private int numeroDerrotas;
+    private int numeroEmpates;
+    private int golsMarcados;
+    private int golsSofridos;
+    private int saldoGols;
+
+    // Getters e Setters para os novos atributos
 
     
-
-
-    public void calcularResumo() {
-        int totalPontuacao = 0;
-        int totalVitorias = 0;
-        int totalEmpates = 0;
-        int totalDerrotas = 0;
-        int totalGolsMarcados = 0;
-        int totalGolsSofridos = 0;
-
-        for (Jogo jogo : listaJogos) {
-            totalGolsMarcados += jogo.getGolsTime1() + jogo.getGolsTime2();
-            totalGolsSofridos += jogo.getGolsTime1() + jogo.getGolsTime2();
-
-            if (jogo.getGolsTime1() > jogo.getGolsTime2()) {
-                totalPontuacao += 3; // Vitória
-                totalVitorias++;
-            } else if (jogo.getGolsTime1() < jogo.getGolsTime2()) {
-                totalDerrotas++;
-            } else {
-                totalPontuacao += 1; // Empate
-                totalEmpates++;
-            }
-        }
-
-        resumoPontuacao = totalPontuacao;
-        resumoTime = "Resumo Geral";
-        // Atribua outros campos conforme necessário
-    }
-    public void exibirResumo() {
-        calcularResumo();
-    }
-
-
-    
+  
    
     public void salvarJogo() {
         if (time1.equals(time2)) {
@@ -93,6 +68,70 @@ public class JogoBean {
     }
 
     
+    public void exibirResumo(Jogo jogo) {
+        jogoSelecionado = jogo;
+
+        // Calcule as informações necessárias
+        calcularInformacoesTime(jogoSelecionado, listaJogos);
+    }
+
+    private void calcularInformacoesTime(Jogo jogo, List<Jogo> listaJogos) {
+        // Inicialize as variáveis para as informações
+        int pontuacao = 0;
+        int vitorias = 0;
+        int derrotas = 0;
+        int empates = 0;
+        int golsMarcados = 0;
+        int golsSofridos = 0;
+
+        // Itera sobre a lista de jogos para calcular as informações do time
+        for (Jogo j : listaJogos) {
+            // Verifica se o time1 é igual ao time do jogo selecionado
+            if (j.getTime1().equals(jogo.getTime1())) {
+                golsMarcados += j.getGolsTime1();
+                golsSofridos += j.getGolsTime2();
+
+                if (j.getGolsTime1() > j.getGolsTime2()) {
+                    pontuacao += 3; // Vitória
+                    vitorias++;
+                } else if (j.getGolsTime1() < j.getGolsTime2()) {
+                    derrotas++;
+                } else {
+                    pontuacao += 1; // Empate
+                    empates++;
+                }
+            }
+            // Verifica se o time2 é igual ao time do jogo selecionado
+            else if (j.getTime2().equals(jogo.getTime1())) {
+                golsMarcados += j.getGolsTime2();
+                golsSofridos += j.getGolsTime1();
+
+                if (j.getGolsTime2() > j.getGolsTime1()) {
+                    pontuacao += 3; // Vitória
+                    vitorias++;
+                } else if (j.getGolsTime2() < j.getGolsTime1()) {
+                    derrotas++;
+                } else {
+                    pontuacao += 1; // Empate
+                    empates++;
+                }
+            }
+        }
+
+        // Calcule o saldo de gols
+        int saldoGols = golsMarcados - golsSofridos;
+
+        // Configure as informações no jogoSelecionado para exibição no diálogo
+        setPontuacao(pontuacao);
+        setNumeroVitorias(vitorias);
+        setNumeroDerrotas(derrotas);
+        setNumeroEmpates(empates);
+        setGolsMarcados(golsMarcados);
+        setGolsSofridos(golsSofridos);
+        setSaldoGols(saldoGols);
+    }
+
+
      
    
   public void salvarEdicao() {
@@ -191,14 +230,68 @@ public class JogoBean {
     public void setGolsTime2(Integer golsTime2) {
         this.golsTime2 = golsTime2;
     }
-    public String getResumoTime() {
-        return resumoTime;
+    
+    // resultado jogos
+    
+    
+    public int getPontuacao() {
+        return pontuacao;
     }
 
-    public int getResumoPontuacao() {
-        return resumoPontuacao;
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
 
+    public int getNumeroVitorias() {
+        return numeroVitorias;
+    }
+
+    public void setNumeroVitorias(int numeroVitorias) {
+        this.numeroVitorias = numeroVitorias;
+    }
+
+    public int getNumeroDerrotas() {
+        return numeroDerrotas;
+    }
+
+    public void setNumeroDerrotas(int numeroDerrotas) {
+        this.numeroDerrotas = numeroDerrotas;
+    }
+
+    public int getNumeroEmpates() {
+        return numeroEmpates;
+    }
+
+    public void setNumeroEmpates(int numeroEmpates) {
+        this.numeroEmpates = numeroEmpates;
+    }
+
+    public int getGolsMarcados() {
+        return golsMarcados;
+    }
+
+    public void setGolsMarcados(int golsMarcados) {
+        this.golsMarcados = golsMarcados;
+    }
+
+    public int getGolsSofridos() {
+        return golsSofridos;
+    }
+
+    public void setGolsSofridos(int golsSofridos) {
+        this.golsSofridos = golsSofridos;
+    }
+
+    public int getSaldoGols() {
+        return saldoGols;
+    }
+
+    public void setSaldoGols(int saldoGols) {
+        this.saldoGols = saldoGols;
+    }
+    
+    
+ 
 
     // Outros métodos conforme necessário
 }

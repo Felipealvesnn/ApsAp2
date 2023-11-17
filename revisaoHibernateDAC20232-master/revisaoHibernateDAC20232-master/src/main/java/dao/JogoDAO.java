@@ -77,6 +77,7 @@ package dao;
 import entidades.Jogo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -144,12 +145,18 @@ public class JogoDAO {
     }
 
     private static AtomicInteger idGenerator = new AtomicInteger(1);
+    
+    private List<String> nomesTimes = Arrays.asList("TimeA", "TimeB", "TimeC", "TimeD", "TimeE");
+
 
     private Jogo criarJogoAleatorio(Random random) {
         Date dataPartida = new Date();
         Date dataCadastro = new Date();
-        String time1 = "TimeA";
-        String time2 = "TimeB";
+
+        // Escolhe aleatoriamente dois nomes de times
+        String time1 = nomesTimes.get(random.nextInt(nomesTimes.size()));
+        String time2 = nomesTimes.get(random.nextInt(nomesTimes.size()));
+
         int golsTime1 = random.nextInt(5);
         int golsTime2 = random.nextInt(5);
 
@@ -158,5 +165,6 @@ public class JogoDAO {
 
         return new Jogo(novoId, dataPartida, dataCadastro, time1, time2, golsTime1, golsTime2);
     }
+
 
 }
