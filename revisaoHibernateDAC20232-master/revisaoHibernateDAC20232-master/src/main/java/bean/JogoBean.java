@@ -11,6 +11,8 @@ import entidades.Jogo;
 import entidades.resultadoJogo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -107,6 +109,8 @@ public class JogoBean {
         // Calcule as informações necessárias
     	ListREsultadoTAbela = new ArrayList<>();
         calcularInformacoesTime(listaJogos);
+        // Após calcular as informações do time, ordene a lista
+        Collections.sort(ListREsultadoTAbela, new PontuacaoComparator());
     }
 
  private void calcularInformacoesTime(List<Jogo> listaJogos) {
@@ -354,4 +358,13 @@ public class JogoBean {
  
 
     // Outros métodos conforme necessário
+}
+
+
+class PontuacaoComparator implements Comparator<resultadoJogo> {
+    @Override
+    public int compare(resultadoJogo r1, resultadoJogo r2) {
+        // Ordene em ordem decrescente com base na pontuação
+        return Integer.compare(r2.getPontuacao(), r1.getPontuacao());
+    }
 }
