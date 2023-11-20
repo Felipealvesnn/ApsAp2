@@ -145,10 +145,10 @@ public class JogoBean {
             	  golsMarcados += j.getGolsTime2();
                   golsSofridos += j.getGolsTime1();
 
-                  if (j.getGolsTime1() > j.getGolsTime2()) {
+                  if (j.getGolsTime2() > j.getGolsTime1()) {
                       pontuacao += 3; // Vitória
                       vitorias++;
-                  } else if (j.getGolsTime1() < j.getGolsTime2()) {
+                  } else if (j.getGolsTime2() < j.getGolsTime1()) {
                       derrotas++;
                   } else {
                       pontuacao += 1; // Empate
