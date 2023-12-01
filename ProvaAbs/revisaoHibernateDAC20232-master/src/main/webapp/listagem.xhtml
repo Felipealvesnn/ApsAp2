@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Listagem de Jogos</title>
+  
+</h:head>
+<h:body>
+
+    <h:form id="formTabela" prependId="false">
+        <h2>Listagem de Jogos</h2>
+
+        <p:dataTable var="jogo" value="#{jogoBean.listaJogos}" emptyMessage="Nenhum jogo encontrado" styleClass="acao-column-align">
+            <!-- ... colunas existentes ... -->
+            
+          
+            <p:column headerText="ID">
+                <h:outputText value="#{jogo.descricao}" />
+            </p:column>
+               <p:column headerText="Valores">
+			        <h:outputText value="#{jogo.getConcatenatedValues()}" />
+		   </p:column>
+
+            <!-- Coluna de Ações -->
+            <p:column headerText="Ações">
+                <p:commandButton icon="pi pi-pencil" action="#{jogoBean.setarJogoEdits(jogo)}" update=":modalEditar" oncomplete="PF('modalEditar').show()" />
+
+                <p:commandButton icon="pi pi-trash" action="#{jogoBean.setarJogoEdits(jogo)}" onclick="PF('confirmation').show()" />
+            </p:column>
+            
+              <p:column headerText="Pares">
+                <p:commandButton value="Mostrar pares" action="#{jogoBean.SetarPares(jogo.getConcatenatedEvenValues())}" update=":formPares" oncomplete="PF('modalPares').show()" />
+               
+            </p:column>
+        </p:dataTable>
+  
+        <p:link value="Voltar para Cadastro" outcome="index.xhtml" />
+    </h:form>
+		    
+		    <p:dialog header="Numeros Pares" widgetVar="modalPares" resizable="false" id="modalPares" modal="true">
+		        <h:form id="formPares" prependId="false">
+		              <h:outputText value="#{jogoBean.GetPares()}" label="Time 1" />
+		          
+		        </h:form>
+		    </p:dialog>
+		
+		    <p:dialog header="Editar Jogo" widgetVar="modalEditar" resizable="false" id="modalEditar" modal="true">
+		        <h:form id="formEdicao" prependId="false">
+		             <p:inputText value="#{jogoBean.GetJogoParaEditarOuexcluir().descricao}" label="Time 1" />
+		            <p:commandButton value="Salvar" action="#{jogoBean.salvarEdicao}" update=":formTabela" oncomplete="PF('modalEditar').hide()" />
+		        </h:form>
+		    </p:dialog>
+
+    <p:confirmDialog id="confirmDialog" message="Tem certeza que deseja excluir o jogo?" header="Confirmação"
+        severity="alert" widgetVar="confirmation">
+        <p:commandButton value="Sim" oncomplete="PF('confirmation').hide()" actionListener="#{jogoBean.excluirJogo()}" 
+            update="formTabela" />
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" onclick="PF('confirmation').hide()" />
+    </p:confirmDialog>
+</h:body>
+</html>
