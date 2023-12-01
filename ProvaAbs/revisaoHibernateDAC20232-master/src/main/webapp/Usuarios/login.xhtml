@@ -1,22 +1,41 @@
+<!-- login.xhtml -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>Login</title>
-    </h:head>
+<h:head>
+    <title>Página de Login</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    <h:body>
-        <h:form>
-            <h:outputLabel for="username" value="Usuário:" />
-            <h:inputText id="username" value="#{loginBean.username}" required="true" />
+        .login-panel {
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+</h:head>
 
-            <h:outputLabel for="password" value="Senha:" />
-            <h:inputSecret id="password" value="#{loginBean.password}" required="true" />
+<h:body>
+    <h:form id="frmsns">
+        <p:panelGrid columns="1" styleClass="login-panel">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            
 
-            <p:commandButton value="Entrar" action="#{loginBean.login}" />
-        </h:form>
-    </h:body>
+            <p:outputLabel for="username" value="Nome de Usuário:" />
+            <p:inputText id="username" value="#{loginBean.username}" required="true" />
 
+            <p:outputLabel for="password" value="Senha:" />
+            <p:password id="password" value="#{loginBean.password}" required="true" feedback="true" />
+
+            <p:commandButton value="Entrar" action="#{loginBean.login}"  update="frmsns" icon="pi pi-sign-in" styleClass="ui-button-success" />
+        </p:panelGrid>
+    </h:form>
+</h:body>
 </html>

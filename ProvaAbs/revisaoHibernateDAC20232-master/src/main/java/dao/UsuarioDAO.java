@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -54,6 +55,23 @@ public class UsuarioDAO {
         }
     }
 
+    public Usuario autenticarUsuario(String nomeUsuario, String senha) {
+        try {
+            Query query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nome = :nomeUsuario", Usuario.class);
+            query.setParameter("nomeUsuario", nomeUsuario);
+            Usuario usuario = (Usuario) query.getSingleResult();
+
+            // Verificar se a senha corresponde
+            if (usuario != null && Objects.equals(usuario.getSenha(), senha)) {
+                return usuario; // Autenticação bem-sucedida
+            } else {
+                return null; // Usuário não encontrado ou senha incorreta
+            }
+        } catch (NoResultException e) {
+            return null; // Usuário não encontrado
+        }
+    }
+    
     public void excluir(Long id) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
