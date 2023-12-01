@@ -18,6 +18,9 @@
             
           
             <p:column headerText="ID">
+                <h:outputText value="#{jogo.id}" />
+            </p:column>
+              <p:column headerText="descricao">
                 <h:outputText value="#{jogo.descricao}" />
             </p:column>
                <p:column headerText="Valores">
@@ -50,7 +53,7 @@
 		    <p:dialog header="Editar Jogo" widgetVar="modalEditar" resizable="false" id="modalEditar" modal="true">
 		        <h:form id="formEdicao" prependId="false">
 		             <p:inputText value="#{jogoBean.GetJogoParaEditarOuexcluir().descricao}" label="Time 1" />
-		            <p:commandButton value="Salvar" action="#{jogoBean.salvarEdicao}" update=":formTabela" oncomplete="PF('modalEditar').hide()" />
+		            <p:commandButton value="Salvar" action="#{jogoBean.salvarEdicao()}" update=":formTabela" oncomplete="PF('modalEditar').hide()" />
 		        </h:form>
 		    </p:dialog>
 

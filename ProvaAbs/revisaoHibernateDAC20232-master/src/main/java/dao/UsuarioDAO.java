@@ -32,6 +32,14 @@ public class UsuarioDAO {
         }
     }
 
+    public Usuario buscarPorId(Long id) {
+        try {
+            return entityManager.find(Usuario.class, id);
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
     public void editar(Usuario usuario) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {

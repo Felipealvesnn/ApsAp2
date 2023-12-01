@@ -35,7 +35,7 @@
                 <h:inputText id="descricao" value="#{jogoBean.jogo.descricao}" styleClass="form-control" />
 
                 <div class="button-container">
-                    <!-- Adicione a classe do Bootstrap ao botão do PrimeFaces -->
+               
                     <p:commandButton value="Salvar" action="#{jogoBean.salvarJogo()}" styleClass="btn btn-primary" update=" formCadastro messages " />
                 </div>
               
@@ -44,14 +44,15 @@
             <!-- Adicione o componente p:growl para exibir mensagens -->
             <p:growl id="messages" showDetail="true" />
 
-            <h:outputLink value="listagem.xhtml">Ir para outra página</h:outputLink>
+            <h:outputLink value="listagem.xhtml">Ir para  página de listagem</h:outputLink>
         </div>
         
     
 
         <!-- Inclua os arquivos JS do Bootstrap e jQuery no final do corpo para garantir compatibilidade -->
-       <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
        
     </h:body>

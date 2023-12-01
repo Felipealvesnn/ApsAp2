@@ -1,7 +1,5 @@
 package principal;
 
-import dao.PincelDao;
-import entidades.Pincel;
 
 public class Principal {
 	public static void main(String[] args) {
@@ -21,6 +19,6 @@ public class Principal {
 //		
 //		
 //		System.out.println(PincelDao.acharPorId(1));
-		System.out.println(PincelDao.listar());
+		
 	}
 }

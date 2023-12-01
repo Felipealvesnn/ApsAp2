@@ -1,0 +1,26 @@
+<!-- listarUsuarios.xhtml -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Listar Usuários</title>
+</h:head>
+<h:body>
+    <h:dataTable value="#{usuarioBean.listaUsuarios}" var="user">
+        <h:column>
+            <f:facet name="header">Nome</f:facet>
+            #{user.nome}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Usuário</f:facet>
+            #{user.usuario}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Ações</f:facet>
+            <p:commandLink value="Editar" action="#{usuarioBean.editarUsuario(user.id)}" />
+            <p:commandLink value="Excluir" action="#{usuarioBean.excluirUsuario(user.id)}" />
+        </h:column>
+    </h:dataTable>
+</h:body>
+</html>
