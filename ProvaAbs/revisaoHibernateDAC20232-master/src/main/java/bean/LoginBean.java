@@ -43,7 +43,7 @@ public class LoginBean {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("usuarioLogado", usuarioAutenticado);
 
-            return "opcoes.xhtml?faces-redirect=true";
+            return "/opcoes.xhtml?faces-redirect=true";
         } else {
             // Exibir mensagem de erro
             FacesContext.getCurrentInstance().addMessage(null,
