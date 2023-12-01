@@ -32,8 +32,11 @@
                 <p:commandButton icon="pi pi-trash" action="#{usuarioBean.excluirUsuario(usuario.id)}" onclick="PF('confirmation').show()" />
             </p:column>
         </p:dataTable>
+<ul>
+    <li><p:link value="Voltar para Cadastro" outcome="cadastrarusuarrio.xhtml" /></li>
+    <li><p:link value="Ir para opcoes" outcome="/opcoes.xhtml" /></li>
+</ul>
 
-       <p:link value="Voltar para Cadastro" outcome="/index.xhtml" />
 
     </h:form>
 

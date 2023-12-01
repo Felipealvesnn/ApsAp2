@@ -1,18 +1,29 @@
-<!-- opcoes.xhtml -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Opções</title>
+    <!-- Adicionando o tema do PrimeFaces para melhorar a aparência -->
+    <h:outputStylesheet library="primefaces-aristo" name="theme.css" />
 </h:head>
 
-<h:body>
-    <h2>Opções</h2>
+<h:body style="text-align: center; margin-top: 50px;"> <!-- Estilizando o corpo da página -->
 
     <h:form>
-        <h:commandLink value="Ir para Index" action="index.xhtml" />
-        <h:commandLink value="Ir para Cadastro Usuário" action="Usuarios/cadastrarusuarrio.xhtml" />
+        <!-- Adicionando parágrafo -->
+        <p>Tela de Opções</p>
+
+        <!-- Usando p:panelGrid para organizar os links -->
+        <p:panelGrid columns="1" style="width: 200px; margin: 0 auto;">
+
+            <!-- Adicionando links PrimeFaces -->
+            <p:link value="Ir para Index" outcome="index.xhtml" styleClass="ui-link" />
+            <p:link value="Ir para Cadastro Usuário" outcome="Usuarios/cadastrarusuarrio.xhtml" styleClass="ui-link" />
+
+        </p:panelGrid>
     </h:form>
+
 </h:body>
 </html>
