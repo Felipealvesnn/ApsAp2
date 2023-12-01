@@ -7,7 +7,7 @@
     <title>Cadastrar Usuário</title>
 </h:head>
 <h:body>
-    <h:form>
+    <h:form id="Cadastros">
         <p:panel header="Cadastrar Usuário">
             <h:panelGrid columns="1" style="width: 100px;">
                 <h:outputLabel for="nome" value="Nome:" />
@@ -18,7 +18,8 @@
                 <h:outputLabel for="senha" value="Senha:" />
                 <p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true" />
 
-                <p:commandButton value="Cadastrar" action="#{usuarioBean.cadastrarUsuario}" />
+                <p:commandButton value="Cadastrar" action="#{usuarioBean.cadastrarUsuario}" update="Cadastros"/>
+                <h:outputLink value="listarUsuarios.xhtml">Ir para  página de listagem</h:outputLink>
             </h:panelGrid>
         </p:panel>
 

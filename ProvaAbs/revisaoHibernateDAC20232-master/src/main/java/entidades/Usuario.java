@@ -14,6 +14,12 @@ public class Usuario {
 
     private String nome;
     private String senha;
+    
+    public Long getId() {
+		return id;
+	}
+	
+
 	public String getNome() {
 		return nome;
 	}
